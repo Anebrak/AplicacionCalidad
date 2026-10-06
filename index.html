@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ALQUIPC · Facturación de alquiler</title>
+  <link rel="stylesheet" href="arc/CSS/styles.css">
+</head>
+<body>
+  <header class="top">
+    <h1>ALQUIPC</h1>
+    <p>Facturación de alquiler de equipos portátiles</p>
+  </header>
+
+  <main class="layout">
+    <section class="panel" aria-labelledby="t-datos">
+      <h2 id="t-datos">Datos del alquiler</h2>
+      <p class="id-cliente">Id-cliente asignado: <strong id="idCliente"></strong></p>
+
+      <form id="formulario" novalidate>
+        <div class="fila dos">
+          <div>
+            <label for="nombre">Nombre(s)</label>
+            <input type="text" id="nombre" placeholder="Ej: María" autocomplete="given-name" required>
+          </div>
+          <div>
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" placeholder="Ej: Gómez Restrepo" autocomplete="family-name" required>
+          </div>
+        </div>
+        <small class="ayuda">Entre nombre y apellidos deben sumar al menos 3 palabras, solo con letras.</small>
+
+        <label for="telefono">Número de teléfono</label>
+        <input type="tel" id="telefono" inputmode="numeric" maxlength="10" placeholder="Ej: 3001234567" autocomplete="tel" required>
+
+        <label for="correo">Correo electrónico</label>
+        <input type="email" id="correo" placeholder="cliente@correo.com" required>
+
+        <div class="fila">
+          <div>
+            <label for="equipos">Número de equipos (mínimo 2)</label>
+           <input type="number" id="equipos" min="2" max="20" step="1" value="2" required>
+          </div>
+          <div>
+            <label for="dias">Días iniciales</label>
+            <input type="number" id="dias" min="1" max="30" step="1" value="1" required>
+          </div>
+          <div>
+            <label for="adicionales">Días adicionales</label>
+            <input type="number" id="adicionales" min="0" max="30" step="1" value="0">
+          </div>
+        </div>
+
+        <fieldset>
+          <legend>Opción de alquiler</legend>
+          <label class="opcion"><input type="radio" name="opcion" value="1" checked> Dentro de la ciudad</label>
+          <label class="opcion"><input type="radio" name="opcion" value="2"> Fuera de la ciudad <small>(+5% domicilio)</small></label>
+          <label class="opcion"><input type="radio" name="opcion" value="3"> Dentro del establecimiento <small>(−5% descuento)</small></label>
+        </fieldset>
+
+        <p id="error" class="error" role="alert" hidden></p>
+
+        <div class="acciones">
+          <button type="submit" class="primario">Calcular factura</button>
+          <button type="reset" id="btnLimpiar" class="secundario">Nuevo cliente</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel resultado" aria-labelledby="t-res" aria-live="polite">
+      <h2 id="t-res">Resumen para el cliente</h2>
+      <div id="vacio" class="vacio">Completa los datos y pulsa «Calcular factura» para ver el resumen.</div>
+
+      <div id="factura" hidden>
+        <dl id="detalle"></dl>
+        <p class="total">Total a pagar <strong id="total"></strong></p>
+        <div class="acciones">
+          <a id="btnCorreo" class="primario enlace" href="#">Enviar por correo</a>
+          <button type="button" id="btnCopiar" class="secundario">Copiar resumen</button>
+        </div>
+        <p id="aviso" class="aviso" hidden></p>
+      </div>
+
+      <p class="nota">Este resumen no se imprime: se envía por correo para ayudar a reducir el uso de papel.</p>
+    </section>
+  </main>
+
+  <script src="arc/JS/app.js"></script>
+</body>
+</html>
